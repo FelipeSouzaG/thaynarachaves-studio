@@ -346,28 +346,23 @@ document.addEventListener('DOMContentLoaded', async function () {
           body: JSON.stringify(dataScheduling),
         });
 
-        if (res.ok) {
-          showModalAlert(
-            'Next',
-            'Agendado!',
-            'Procedimento Agenddo com sucesso',
-            () => {
-              window.location.reload();
-            }
-          );
+        const data = await res.json();
+
+        if (data.status === 'success') {
+          showModalAlert('Next', 'Agendado!', data.message, () => {
+            window.location.reload();
+          });
+        } else if (data.error === 'error') {
+          showModalAlert('Alert', 'Erro!', data.message, closeModal);
         } else {
-          showModalAlert(
-            'Alert',
-            'Erro!',
-            'Falha no agendamento, verifique os dados',
-            closeModal
-          );
+          showModalAlert('Alert', 'Erro!', data.message, closeModal);
         }
       } catch (error) {
         console.error('Erro no agendamento:', error);
         showModalAlert('Alert', 'Erro de Conexão!', error.message, closeModal);
         return;
       }
+      
     });
   }
 });
