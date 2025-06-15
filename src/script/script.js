@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', async function () {
   const closeMenuBtn = document.querySelector('.close-menu-btn');
   const menuLinks = document.querySelectorAll('.menu-link');
 
-  // Função para abrir o menu
   function openMenu() {
     menu.classList.add('show');
     document.body.style.overflow = 'hidden';
@@ -139,7 +138,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   function init() {
     positionMarkers();
-    s;
     sections.forEach((section) => {
       observer.observe(section);
     });
