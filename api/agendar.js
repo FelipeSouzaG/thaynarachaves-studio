@@ -1,45 +1,49 @@
 export default async function handler(request, response) {
-  // 1. Garantir que a requisição seja um POST
-  if (request.method !== 'POST') {
-    return response.status(405).json({ message: 'Method Not Allowed' });
-  }
-
-  // 2. Pegar a URL secreta das Variáveis de Ambiente da Vercel
   const GOOGLE_SCRIPT_URL = process.env.API_URL;
 
   if (!GOOGLE_SCRIPT_URL) {
-    return response
-      .status(500)
-      .json({
-        status: 'error',
-        message: 'API URL não configurada no servidor.',
-      });
+    return response.status(500).json({
+      status: 'error',
+      message: 'API URL não configurada no servidor.',
+    });
   }
 
-  try {
-    // 3. Encaminhar a requisição para o Google Apps Script
-    const googleResponse = await fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      // request.body já vem como um objeto JSON pela Vercel
-      body: JSON.stringify(request.body),
-    });
+  if (request.method === 'GET') {
+    try {
+      const { search } = new URL(request.url, `http://${request.headers.host}`);
 
-    // 4. Pegar a resposta do Google
-    const responseData = await googleResponse.json();
+      const urlToFetch = GOOGLE_SCRIPT_URL + search;
 
-    // 5. Encaminhar a resposta do Google de volta para o seu frontend
-    // Usamos o status da resposta do Google, se disponível, ou 200 por padrão.
-    response.status(googleResponse.status).json(responseData);
-  } catch (error) {
-    console.error('Erro no proxy para o Google Script:', error);
-    response
-      .status(500)
-      .json({
-        status: 'error',
-        message: 'Falha ao se comunicar com o serviço de agendamento.',
+      const googleResponse = await fetch(urlToFetch);
+      const responseData = await googleResponse.json();
+
+      return response.status(200).json(responseData);
+    } catch (error) {
+      console.error('Erro no proxy GET para o Google Script:', error);
+      return response
+        .status(500)
+        .json({ status: 'error', message: 'Falha ao buscar dados.' });
+    }
+  } else if (request.method === 'POST') {
+    try {
+      const googleResponse = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(request.body),
       });
+
+      const responseData = await googleResponse.json();
+
+      return response.status(200).json(responseData);
+    } catch (error) {
+      console.error('Erro no proxy POST para o Google Script:', error);
+      return response
+        .status(500)
+        .json({ status: 'error', message: 'Falha ao criar agendamento.' });
+    }
+  } else {
+    return response.status(405).json({ message: 'Method Not Allowed' });
   }
 }
