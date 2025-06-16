@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   document
     .getElementById('trainingBtn-mobile')
     .addEventListener('click', async () => {
-      await showModalTraining();
+      setTimeout(await showModalTraining(), 100);
     });
 
   document.addEventListener('click', (e) => {
