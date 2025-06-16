@@ -32,7 +32,8 @@ nav, div, span, p, h1, h2, h3, h4, h5, h6 {
   --color-3: rgb(60, 60, 60); /* #2d2d2d */
   --color-4: rgb(0, 255, 255);
   --color-5: rgb(240, 155, 0); /* #f5a500  */
-  --color-6: rgb(0, 125, 150); /* #007d96 */
+  --color-6: rgb(177, 121, 91);
+  --color-7: rgb(0, 125, 150); /* #007d96 */
   --color-trans-1: rgba(219, 219, 222, 0.4);
   --color-trans-2: rgba(0, 125, 150, 0.4);
   --color-trans-3: rgb(45, 45, 45, 0.4);
