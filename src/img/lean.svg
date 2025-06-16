@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" width="400" height="200"
+  viewBox="5 20 90 20">
+  <defs>
+    <clipPath id="clip_0">
+      <path transform="matrix(.24,0,0,.24,0,0)" d="M0 0H425V221.875H0Z" clip-rule="evenodd" />
+    </clipPath>
+    <clipPath id="clip_1">
+      <path transform="matrix(.24,0,0,.24,0,0)" d="M0 0H425V221.875H0Z" clip-rule="evenodd" />
+    </clipPath>
+  </defs>
+  <g clip-path="url(#clip_0)">
+    <path transform="matrix(.0,0,0,0,0,0)" d="M0 0H136V71H0Z" fill="#ffffff" />
+  </g>
+  <g clip-path="url(#clip_1)">
+    <text fill="#383b3a" xml:space="preserve" transform="matrix(.75 0 0 .75 6.272089 3.3135567)" font-size="39.44"
+      font-family="Segoe UI" font-weight="bold">
+      <tspan y="40" x="0 26.30484 54.778734 85.461139">LEAN</tspan>
+    </text>
+    <text fill="#007d96" xml:space="preserve" transform="matrix(.75 0 0 .75 7.1744329 36.36395)" font-size="16"
+      font-family="Segoe UI" font-weight="bold">
+      <tspan y="14" x=".015625 13.895294 23.702225 33.509157 43.316087 48.888475 58.695405 68.502338 75.03049 0.5">
+        Manufacturing</tspan>
+    </text>
+  </g>
+</svg>

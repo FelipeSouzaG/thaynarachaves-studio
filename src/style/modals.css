@@ -1,0 +1,505 @@
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2003;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: var(--color-header);
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-6); /* Cor de fundo para conteúdo */
+  margin: auto; /* Centraliza vertical e horizontalmente */
+  width: 96%;
+  max-width: 600px; /* Largura máxima para desktop */
+  max-height: 90vh; /* Altura máxima de 80% da viewport */
+  border-radius: 1.5em;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centralização precisa */
+  overflow-y: auto;
+}
+
+.modal-content h2 {
+  background-color: var(--color-6);
+  width: 100%;
+  border-radius: 1em;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: 1em 0;
+  color: var(--color-1);
+  font-family: var(--font-1);
+  font-size: 1.2em;
+  font-weight: 600;
+  text-align: center;
+}
+
+.modal-content p {
+  background-color: var(--color-1);
+  color: var(--color-3);
+  font-family: var(--font-1);
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 1.5em;
+  padding: 2em 1em;
+  text-align: center;
+}
+
+.modal-content-btn {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: var(--color-6);
+  width: 100%;
+  padding: 1em 0;
+  border-radius: 1.1em;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.modal-content-btn-enable,
+.modal-content-btn-ok,
+.modal-content-btn-edit,
+.modal-content-btn-cancel {
+  background-color: var(--color-1);
+  color: var(--color-3);
+  font-family: var(--font-1);
+  font-size: 1em;
+  font-weight: 600;
+  padding: 0.25em 0.5em;
+  border: 0.1em solid transparent;
+  border-radius: 0.5em;
+  cursor: pointer;
+  width: 40%;
+  transition: transform 0.3s;
+}
+
+.modal-content-btn-enable:hover {
+  background-color: var(--color-3);
+  transform: scale(1.1);
+  color: var(--color-1);
+}
+.modal-content-btn-enable:active {
+  background-color: var(--color-3);
+  transform: scale(1.2);
+  color: var(--color-2);
+}
+
+.modal-content-btn-ok:hover {
+  background-color: var(--color-yes);
+  transform: scale(1.1);
+  color: var(--color-1);
+}
+.modal-content-btn-ok:active {
+  background-color: var(--color-yes);
+  transform: scale(1.2);
+  color: var(--color-1);
+}
+ 
+.modal-content-btn-cancel:hover {
+  background-color: var(--color-no);
+  transform: scale(1.1);
+  color: var(--color-1);
+}
+.modal-content-btn-cancel:active {
+  background-color: var(--color-no);
+  transform: scale(1.2);
+  color: var(--color-1);
+}
+
+.modal-content-btn-edit:hover {
+  background-color: var(--color-end);
+  transform: scale(1.1);
+  color: var(--color-3);
+}
+.modal-content-btn-edit:active {
+  background-color: var(--color-end);
+  transform: scale(1.2);
+  color: var(--color-3);
+}
+
+.modal-content-btn-disabled {
+  background-color: var(--color-3);
+  color: var(--color-header);
+  font-family: var(--font-1);
+  font-size: 1em;
+  font-weight: 600;
+  padding: 0.3em;
+  border: 0.1em solid var(--color-header);
+  border-radius: 0.8em;
+  width: 35%;
+ }
+
+.modal-content-btn-enter {
+  background-color: var(--color-3);
+  color: var(--color-1);
+  font-family: var(--font-1);
+  font-size: 1em;
+  font-weight: 600;
+  padding: 0.25em 0.5em;
+  border: 0.1em solid transparent;
+  border-radius: 0.5em;
+  cursor: pointer;
+  width: 30%;
+  transition: transform 0.3s;
+}
+
+.modal-content-btn-enter:hover {
+  background-color: var(--color-yes);
+  transform: scale(1.1);
+  color: var(--color-1);
+}
+.modal-content-btn-enter:active {
+  background-color: var(--color-yes);
+  transform: scale(1.2);
+  color: var(--color-1);
+}
+
+.modal-user {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: var(--color-header);
+  backdrop-filter: blur(5px);
+}
+
+.modal-user-content {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-6); /* Cor de fundo para conteúdo */
+  margin: auto; /* Centraliza vertical e horizontalmente */
+  width: 96%;
+  max-width: 600px; /* Largura máxima para desktop */
+  max-height: 90vh; /* Altura máxima de 80% da viewport */
+  border-radius: 1.5em;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centralização precisa */
+  overflow-y: auto;
+}
+
+.modal-user-content-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0.5em;
+  width: 100%;
+  border-top-left-radius: 1.5em;
+  border-top-right-radius: 1.5em;
+  background-color: var(--color-6);
+}
+
+.modal-user-content-title {
+  width: 100%;
+  padding-bottom: 1em;
+  text-align: center;
+  background-color: var(--color-6);
+}
+
+.modal-user-title {
+  color: var(--color-1);
+  font-family: var(--font-1);
+  font-weight: 800;
+  font-size: 1.2em;
+}
+
+.close {
+  background: transparent;
+  border: none;
+  font-family: var(--font-1);
+  color: var(--color-1);
+  font-size: 1.5em;
+  font-weight: 100;
+  padding: 0 0.3em 0.1em;
+  cursor: pointer;
+  transition: transform 0.3s;
+  z-index: 2001;
+}
+
+.close:hover, .close:active {
+  transform: scale(1.2);
+  background-color: var(--color-no);
+  color: var(--color-1);
+}
+
+.arrow-left {
+  background: transparent;
+  border: none;
+  font-family: var(--font-1);
+  color: var(--color-1);
+  font-size: 1.5em;
+  font-weight: 100;
+  padding: 0.1em 0.2em;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s;
+  z-index: 2001;
+}
+
+.arrow-left:hover, .arrow-left:active {
+  transform: scale(1.2);
+  background-color: var(--color-1);
+  color: var(--color-3);
+}
+
+.modal-user-content-main {
+  padding: 1em;
+  width: 100%;
+  background-color: var(--color-1);
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.modal-user-content-main p {
+  background-color: var(--color-1);
+  color: var(--color-3);
+  font-family: var(--font-1);
+  font-size: 1em;
+  line-height: 1em;
+  font-weight: 600;
+  text-align: center;
+  padding: 1em;
+  line-height: 1.5em;
+}
+
+.modal-user-footer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: var(--color-6);
+  width: 100%;
+  padding: 0.6em 0;
+  border-radius: 1em;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.modal-information {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: var(--color-header);
+  backdrop-filter: blur(5px); /* Efeito de blur opcional */
+}
+
+.modal-information-content {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-6); /* Cor de fundo para conteúdo */
+  margin: auto; /* Centraliza vertical e horizontalmente */
+  width: 96%;
+  max-width: 600px; /* Largura máxima para desktop */
+  max-height: 90vh; /* Altura máxima de 80% da viewport */
+  border-radius: 1.5em;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centralização precisa */
+  overflow-y: auto; /* Scroll se conteúdo for muito longo */
+}
+ 
+.modal-information-content-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0.5em;
+  width: 100%;
+  border-top-left-radius: 1.5em;
+  border-top-right-radius: 1.5em;
+  background-color: var(--color-6);
+}
+
+.modal-information-content-title {
+  width: 100%;
+  padding-bottom: 1em;
+  text-align: center;
+  background-color: var(--color-6);
+}
+
+.modal-information-title {
+  color: var(--color-1);
+  font-family: var(--font-1);
+  font-weight: 800;
+  font-size: 1.2em;
+}
+
+.modal-information-content-main {
+  padding: 1em;
+  width: 100%;
+  background-color: var(--color-1);
+  flex-grow: 1;
+  overflow-y: auto; /* Scroll interno se necessário */
+}
+
+.modal-information-content-footer {
+  padding: 1em;
+  width: 100%;
+  background-color: var(--color-6);
+  border-bottom-left-radius: 1.5em;
+  border-bottom-right-radius: 1.5em;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-information-close {
+  background-color: var(--color-no);
+  color: var(--color-1);
+  font-family: var(--font-1);
+  font-size: 0.9em;
+  font-weight: 600;
+  padding: 0.8em 2em;
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.modal-information-close:hover {
+  background-color: var(--color-no);
+  transform: scale(1.05);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.modal-information-close:active {
+  transform: scale(0.98);
+}
+
+.bi {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  vertical-align: -0.125em;
+  overflow: visible;
+}
+
+.bi-plus {
+  display: inline-block;
+  width: 1.3em;
+  height: 1.3em;
+  fill: currentColor;
+  vertical-align: -0.2em;
+  overflow: visible;
+}
+
+.bi-close {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  fill: currentColor;
+  vertical-align: -0.125em;
+  overflow: visible;
+}
+
+.contact-card {
+  padding: 1em;
+  width: 100%;
+}
+
+.contact-card h2 {
+  font-family: var(--font-1);
+  font-weight: 800;
+  font-size: 1em;
+  color: var(--color-6);
+  text-align: left;
+  padding: 1em 0 1em 0.5em;
+}
+
+.contact-card h3 {
+  font-family: var(--font-1);
+  font-weight: 600;
+  font-size: 0.8em;
+  text-align: left;
+  color: var(--color-6);
+  padding: 0.5em 0;
+}
+
+.contact-card p {
+  font-family: var(--font-2);
+  font-weight: 500;
+  font-size: 0.8em;
+  color: var(--color-3);
+  line-height: 1.5;
+  padding: 0.25em 0;
+}
+
+.contact-card span {
+  font-family: var(--font-1);
+  font-weight: 600;
+  font-size: 1em;
+  color: var(--color-6);
+}
+
+.contact-card ul {
+  padding: 0.5em 0 0.5em 2em;
+}
+
+.contact-card i {
+  font-family: var(--font-2);
+  font-weight: 600;
+  font-size: 0.8em;
+  color: var(--color-3);
+}
+
+.contact-card img {
+  width: 100%;
+  padding: 1em 20% 1em 0;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.5em;
+  margin-bottom: 1em;
+}
+
+.contact-item span {
+  font-family: var(--font-1);
+  font-weight: 500;
+  font-size: 0.8em;
+  color: var(--color-3);
+  text-align: left;
+}
+
+.contact-item a {
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.3s;
+  font-family: var(--font-1);
+  font-weight: 600;
+  font-size: 0.8em;
+  text-align: left;
+  color: var(--color-6);
+}
+
+.contact-item a:hover {
+  color: var(--color-2);
+  transform: scale(1.04);
+}
+
+.contact-item a:active {
+  color: var(--color-2);
+  transform: scale(1.08);
+}
