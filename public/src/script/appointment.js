@@ -5,6 +5,8 @@ import {
   validatePhone,
 } from './validation.js';
 
+const API_URL = '/api/agendar';
+
 export async function appointmentDay(dateSelected) {
   const container = document.getElementById('tableAppointmentDateMobile');
   container.innerHTML = '<p>Carregando...</p>';
@@ -83,7 +85,7 @@ async function appointmentTime(horario, data) {
 
       <div class="form-group">
         <input class="form-group-input" type="text" id="phone" required>
-        <label class="form-group-label" for="">Telefone:</label>
+        <label class="form-group-label" for="phone">Telefone:</label>
         <i class="bi bi-phone toggle-icon-input"></i>
       </div>
     </div>
@@ -107,7 +109,6 @@ async function appointmentTime(horario, data) {
     const phoneDigits = rawPhone.replace(/\D/g, '');
     const procedimento = document.querySelector('input[name="phase"]:checked');
 
-    // Validações
     if (!procedimento) {
       showModalAlert(
         'Alert',
@@ -147,7 +148,7 @@ async function appointmentTime(horario, data) {
     };
 
     try {
-      const res = await fetch('/api/agendar', {
+      const res = await fetch(API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
