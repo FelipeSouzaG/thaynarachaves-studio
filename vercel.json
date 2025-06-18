@@ -2,10 +2,16 @@
   "version": 2,
   "builds": [
     { "src": "api/agendar.js", "use": "@vercel/node" },
-    { "src": "public/(.*)", "use": "@vercel/static" },
+    { "src": "public/index.html", "use": "@vercel/static" },
+    { "src": "public/style/*.css", "use": "@vercel/static" },
+    { "src": "public/script/*.js", "use": "@vercel/static" },
+    { "src": "public/img/*", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/api/agendar", "dest": "/api/agendar.js" },
+    { "src": "/style/(.*)", "dest": "/public/style/$1" },
+    { "src": "/script/(.*)", "dest": "/public/script/$1" },
+    { "src": "/img/(.*)", "dest": "/public/img/$1" },
     { "src": "/(.*)", "dest": "/public/index.html" }
   ]
 }
