@@ -12,10 +12,17 @@ export async function appointmentDay(dateSelected) {
   container.innerHTML = '<p>Carregando...</p>';
 
   try {
-    const response = await fetch(`${API_URL}?data=${dateSelected}`);
+    // Codifica a data para URL
+    const encodedDate = encodeURIComponent(dateSelected);
+    const response = await fetch(`${API_URL}?data=${encodedDate}`);
+    
+    if (!response.ok) {
+      throw new Error(`Erro HTTP: ${response.status}`);
+    }
+
     const horarios = await response.json();
 
-    if (!horarios.length) {
+    if (!horarios || !Array.isArray(horarios) || horarios.length === 0) {
       container.innerHTML = '<p>Nenhum horário disponível para esta data.</p>';
       return;
     }
@@ -28,15 +35,14 @@ export async function appointmentDay(dateSelected) {
     `;
 
     const times = document.getElementById('times');
+    times.innerHTML = ''; // Limpa conteúdo anterior
 
     horarios.forEach((horario) => {
       if (!horario.nome) {
         const btn = document.createElement('button');
         btn.textContent = horario.horario;
         btn.classList.add('appointment-button');
-        btn.addEventListener('click', async () => {
-          await appointmentTime(horario.horario, dateSelected);
-        });
+        btn.addEventListener('click', () => appointmentTime(horario.horario, dateSelected));
         times.appendChild(btn);
       } else {
         const ocupado = document.createElement('div');
@@ -48,8 +54,10 @@ export async function appointmentDay(dateSelected) {
     });
   } catch (error) {
     console.error('Erro ao buscar horários:', error);
-    container.innerHTML =
-      '<p>Erro ao carregar horários. Tente novamente mais tarde.</p>';
+    container.innerHTML = `
+      <p>Erro ao carregar horários.</p>
+      <button onclick="location.reload()" class="retry-button">Tentar novamente</button>
+    `;
   }
 }
 
@@ -57,11 +65,10 @@ async function appointmentTime(horario, data) {
   const modal = document.getElementById('modal-register');
   const title = document.getElementById('modal-register-title');
   const content = document.getElementById('modal-register-main');
-  const btnClose = document.getElementById('close-register');
   const footer = document.getElementById('modal-register-footer');
 
   title.textContent = 'Agendar Procedimento';
-
+  
   content.innerHTML = `
     <div class="form-content">
       <div class="title-loss">
@@ -69,17 +76,17 @@ async function appointmentTime(horario, data) {
       </div>
       <div class="data-items">
         <label class="radio-option label">
-          <input type="radio" class="radio" name="phase" value="Sobrancelhas">
+          <input type="radio" class="radio" name="phase" value="Sobrancelhas" required>
           <span class="span">Sobrancelhas</span>
         </label>
         <label class="radio-option label">
-          <input type="radio" class="radio" name="phase" value="Extensão de Cílios">
+          <input type="radio" class="radio" name="phase" value="Extensão de Cílios" required>
           <span class="span">Extensão de Cílios</span>
         </label>
       </div>
 
       <div class="form-group">
-        <input class="form-group-input" type="text" id="name" placeholder="">
+        <input class="form-group-input" type="text" id="name" placeholder="" required>
         <label class="form-group-label" for="name">Digite seu nome</label>
       </div>
 
@@ -97,7 +104,7 @@ async function appointmentTime(horario, data) {
     </div>
   `;
 
-  btnClose.onclick = closeModalRegister;
+  document.getElementById('close-register').onclick = closeModalRegister;
   modal.style.display = 'block';
 
   const phone = document.getElementById('phone');
@@ -109,45 +116,31 @@ async function appointmentTime(horario, data) {
     const phoneDigits = rawPhone.replace(/\D/g, '');
     const procedimento = document.querySelector('input[name="phase"]:checked');
 
+    // Validações
     if (!procedimento) {
-      showModalAlert(
-        'Alert',
-        'Procedimento inválido!',
-        'Por favor, selecione um procedimento.',
-        closeModal
-      );
+      showModalAlert('Atenção', 'Por favor, selecione um procedimento.', closeModal);
       return;
     }
 
     if (!name) {
-      showModalAlert(
-        'Alert',
-        'Nome Inválido',
-        'Por favor, digite seu nome.',
-        closeModal
-      );
+      showModalAlert('Atenção', 'Por favor, digite seu nome completo.', closeModal);
       return;
     }
 
     if (!validatePhone(phoneDigits)) {
-      showModalAlert(
-        'Alert',
-        'Telefone Inválido',
-        'Por favor, digite um telefone válido.',
-        closeModal
-      );
+      showModalAlert('Atenção', 'Por favor, digite um telefone válido com DDD.', closeModal);
       return;
     }
 
-    const payload = {
-      data,
-      horario,
-      nome: name,
-      telefone: formatPhoneValue(phoneDigits),
-      procedimento: procedimento.value,
-    };
-
     try {
+      const payload = {
+        data,
+        horario,
+        nome: name,
+        telefone: formatPhoneValue(phoneDigits),
+        procedimento: procedimento.value,
+      };
+
       const res = await fetch(API_URL, {
         method: 'POST',
         headers: {
@@ -158,21 +151,21 @@ async function appointmentTime(horario, data) {
 
       const result = await res.json();
 
-      if (!res.ok || result.status === 'error') {
-        showModalAlert('Alert', 'Erro!', result.message, closeModal);
-        return;
+      if (!res.ok) {
+        throw new Error(result.message || 'Erro ao processar agendamento');
       }
 
-      if (!result.telegramSent && result.fallbackWaLink) {
-        window.open(result.fallbackWaLink, '_blank');
-      }
-
-      showModalAlert('Next', 'Agendado!', result.message, () => {
+      // Feedback para o usuário
+      showModalAlert('Sucesso!', 'Agendamento realizado com sucesso!', () => {
+        if (result.fallbackWaLink && !result.telegramSent) {
+          window.open(result.fallbackWaLink, '_blank');
+        }
         window.location.reload();
       });
+
     } catch (error) {
       console.error('Erro no agendamento:', error);
-      showModalAlert('Alert', 'Erro de Conexão!', error.message, closeModal);
+      showModalAlert('Erro', error.message || 'Falha ao agendar. Tente novamente.', closeModal);
     }
   });
 }
