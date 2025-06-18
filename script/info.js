@@ -1,3 +1,5 @@
+import { closeModalRegister } from './modals.js';
+
 export async function showModalInformation() {
   const modal = document.getElementById('modal-information');
   const title = document.getElementById('modal-information-title');
@@ -185,11 +187,11 @@ export async function showModalCommerce() {
 }
 
 export async function showModalTraining() {
-  const modal = document.getElementById('modal-information');
-  const title = document.getElementById('modal-information-title');
-  const content = document.getElementById('modal-information-main');
-  const btnClose = document.getElementById('close-information');
-  const init = document.getElementById('init');
+  const modal = document.getElementById('modal-register');
+  const title = document.getElementById('modal-register-title');
+  const content = document.getElementById('modal-register-main');
+  const btnClose = document.getElementById('close-register');
+  const footer = document.getElementById('modal-register-footer');
 
   const imageSources = [
     '/img/curso-banner.svg',
@@ -231,20 +233,28 @@ export async function showModalTraining() {
     modal.style.display = 'none';
   };
 
-  init.onclick = function () {
-    content.scrollTo({
-      top: 0,
-      behavior: 'smooth',
+  footer.innerHTML = `
+    <div class="modal-user-footer">
+      <button id="appointmentWa" class="modal-content-btn-enable"> Agendar </button>
+    </div>
+  `;
+
+  document
+    .getElementById('appointmentWa')
+    .addEventListener('click', function () {
+      closeModalRegister();
+      const whatsappUrl =
+        'https://wa.me/5531973082873?text=Olá%20Thaynara!%20Gostaria%20de%20mais%20informações%20sobre%20o%20curso%20de%20Lash%20Desing';
+      window.open(whatsappUrl, '_blank');
     });
-  };
 }
 
 async function showModalInfoCarousel(titleCarousel, imageSrc, imageAlt, text) {
-  const modal = document.getElementById('modal-information');
-  const title = document.getElementById('modal-information-title');
-  const content = document.getElementById('modal-information-main');
-  const btnClose = document.getElementById('close-information');
-  const init = document.getElementById('init');
+  const modal = document.getElementById('modal-register');
+  const title = document.getElementById('modal-register-title');
+  const content = document.getElementById('modal-register-main');
+  const btnClose = document.getElementById('close-register');
+  const footer = document.getElementById('modal-register-footer');
 
   title.textContent = `${titleCarousel}`;
   content.innerHTML = `
@@ -260,12 +270,17 @@ async function showModalInfoCarousel(titleCarousel, imageSrc, imageAlt, text) {
     modal.style.display = 'none';
   };
 
-  init.onclick = function () {
-    content.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
+  footer.innerHTML = `
+    <div class="modal-user-footer">
+      <button id="appointmentBtn" class="modal-content-btn-enable">Agendar</button>
+    </div>
+  `;
+
+  document.getElementById('appointmentBtn').addEventListener('click', () => {
+    closeModalRegister();
+    const section = document.getElementById('contato');
+    section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 }
 
 export async function setupCarouselModalListeners() {
