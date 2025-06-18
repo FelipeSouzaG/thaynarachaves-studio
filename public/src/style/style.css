@@ -1,7 +1,7 @@
-@import url(./header.css);
-@import url(./desktop.css);
-@import url(./modals.css);
-@import url(./forms.css);
+@import url(/header.css);
+@import url(/desktop.css);
+@import url(/modals.css);
+@import url(/forms.css);
 
 * {
   margin: 0;
