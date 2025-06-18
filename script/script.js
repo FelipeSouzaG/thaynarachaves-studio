@@ -146,15 +146,8 @@ document.addEventListener('DOMContentLoaded', async function () {
   document
     .getElementById('trainingBtn-mobile')
     .addEventListener('click', async () => {
-      setTimeout(() => showModalTraining(), 100);
+      await showModalTraining();
     });
-
-  document.addEventListener('click', (e) => {
-    if (e.target.closest('.scheduling button')) {
-      const section = document.getElementById('contato');
-      section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
 
   const el = document.getElementById('dateMobile');
   const formattedToday = validateDate(el);
