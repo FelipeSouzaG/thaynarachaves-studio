@@ -32,6 +32,15 @@ export async function appointmentDay(dateSelected) {
 
     const times = document.getElementById('times');
 
+    horarios.sort((a, b) => {
+      const timeToMinutes = (time) => {
+        const [hours, minutes] = time.split(':').map(Number);
+        return hours * 60 + minutes;
+      };
+
+      return timeToMinutes(a.horario) - timeToMinutes(b.horario);
+    });
+
     horarios.forEach((horario) => {
       if (!horario.nome) {
         const btn = document.createElement('button');
