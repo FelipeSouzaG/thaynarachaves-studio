@@ -156,13 +156,12 @@ document.addEventListener('DOMContentLoaded', async function () {
   el.value = formattedToday;
   el.min = formattedToday;
 
-  const dateFormat = formatDate(el.value);
+  await appointmentDay(formatDate(el.value));
 
   el.addEventListener('change', async () => {
-    await appointmentDay(dateFormat);
+    const newDate = formatDate(el.value);
+    await appointmentDay(newDate);
   });
-
-  await appointmentDay(dateFormat);
 
   await setupCarouselModalListeners();
 });
