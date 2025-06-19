@@ -92,9 +92,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target
-            .querySelector('.section-content')
-            .classList.add('visible');
+          const sectionContent = entry.target.querySelector('.section-content');
+          if (sectionContent) {
+            // Verifica se o elemento existe
+            sectionContent.classList.add('visible');
+          }
         }
       });
     },
@@ -152,6 +154,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   const el = document.getElementById('dateMobile');
   const formattedToday = validateDate(el);
   el.value = formattedToday;
+  el.min = formattedToday;
 
   const dateFormat = formatDate(el.value);
 
