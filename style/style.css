@@ -675,6 +675,10 @@ html {
   color: var(--color-no);
 }
 
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 .footer-mobile {
   position: fixed;
   bottom: 0;
