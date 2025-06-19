@@ -7,7 +7,12 @@ import {
 
 export async function appointmentDay(dateSelected) {
   const container = document.getElementById('tableAppointmentDateMobile');
-  container.innerHTML = '<p>Carregando...</p>';
+  container.innerHTML = `
+    <div class="loading-spinner">
+      <div class="spinner"></div>
+      <p>Buscando horários...</p>
+    </div>
+  `;
 
   try {
     const response = await fetch(`/api/get-horarios?data=${dateSelected}`);
@@ -19,16 +24,16 @@ export async function appointmentDay(dateSelected) {
     const horarios = await response.json();
 
     if (horarios.length === 0) {
-      container.innerHTML = '<p>Nenhum horário disponível para esta data.</p>';
+      container.innerHTML = '<label class="label">Nenhum horário disponível para esta data.</label>';
       return;
     }
 
     container.innerHTML = `
-          <div class="form-center">
-            <label class="label">Horários disponiveis</label>
-              <div class="form-data-item" id="times"><div>
-          </div>
-        `;
+      <div class="form-center">
+        <label class="label">Horários disponiveis</label>
+        <div class="form-data-item" id="times"><div>
+      </div>
+    `;
 
     const times = document.getElementById('times');
 
@@ -60,9 +65,14 @@ export async function appointmentDay(dateSelected) {
       }
     });
   } catch (error) {
-    console.error('Erro ao buscar horários:', error);
-    container.innerHTML =
-      '<p>Erro ao carregar horários. Tente novamente mais tarde.</p>';
+    container.innerHTML = `
+      <div class="loading-spinner">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#dc3545">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>Erro ao carregar! Tente novamente.</span>
+      </div>
+    `;
   }
 }
 
