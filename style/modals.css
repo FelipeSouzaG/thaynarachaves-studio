@@ -14,17 +14,17 @@
 .modal-content {
   display: flex;
   flex-direction: column;
-  background-color: var(--color-6); /* Cor de fundo para conteúdo */
-  margin: auto; /* Centraliza vertical e horizontalmente */
+  background-color: var(--color-6);
+  margin: auto;
   width: 96%;
-  max-width: 600px; /* Largura máxima para desktop */
-  max-height: 90vh; /* Altura máxima de 80% da viewport */
+  max-width: 600px;
+  max-height: 90vh;
   border-radius: 1.5em;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Centralização precisa */
+  transform: translate(-50%, -50%);
   overflow-y: auto;
 }
 
@@ -179,17 +179,17 @@
 .modal-user-content {
   display: flex;
   flex-direction: column;
-  background-color: var(--color-6); /* Cor de fundo para conteúdo */
-  margin: auto; /* Centraliza vertical e horizontalmente */
+  background-color: var(--color-6);
+  margin: auto;
   width: 96%;
-  max-width: 600px; /* Largura máxima para desktop */
-  max-height: 90vh; /* Altura máxima de 80% da viewport */
+  max-width: 600px;
+  max-height: 90vh;
   border-radius: 1.5em;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Centralização precisa */
+  transform: translate(-50%, -50%);
   overflow-y: auto;
 }
 
@@ -299,24 +299,24 @@
   height: 100%;
   overflow: auto;
   background-color: var(--color-header);
-  backdrop-filter: blur(5px); /* Efeito de blur opcional */
+  backdrop-filter: blur(5px);
 }
 
 .modal-information-content {
   display: flex;
   flex-direction: column;
-  background-color: var(--color-6); /* Cor de fundo para conteúdo */
-  margin: auto; /* Centraliza vertical e horizontalmente */
+  background-color: var(--color-6);
+  margin: auto;
   width: 96%;
-  max-width: 600px; /* Largura máxima para desktop */
-  max-height: 90vh; /* Altura máxima de 80% da viewport */
+  max-width: 600px;
+  max-height: 90vh;
   border-radius: 1.5em;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Centralização precisa */
-  overflow-y: auto; /* Scroll se conteúdo for muito longo */
+  transform: translate(-50%, -50%);
+  overflow-y: auto;
 }
  
 .modal-information-content-header {
@@ -349,7 +349,7 @@
   width: 100%;
   background-color: var(--color-1);
   flex-grow: 1;
-  overflow-y: auto; /* Scroll interno se necessário */
+  overflow-y: auto;
 }
 
 .modal-information-content-footer {
@@ -418,49 +418,43 @@
 }
 
 .contact-card h2 {
-  font-family: var(--font-1);
+  font-family: var(--font-3);
   font-weight: 800;
-  font-size: 1em;
-  color: var(--color-6);
+  font-size: 1.3em;
+  color: var(--color-3);
   text-align: left;
   padding: 1em 0 1em 0.5em;
 }
 
 .contact-card h3 {
-  font-family: var(--font-1);
+  font-family: var(--font-3);
   font-weight: 600;
   font-size: 0.8em;
   text-align: left;
-  color: var(--color-6);
+  color: var(--color-3);
   padding: 0.5em 0;
 }
 
 .contact-card p {
-  font-family: var(--font-2);
+  font-family: var(--font-3);
   font-weight: 500;
-  font-size: 0.8em;
+  font-size: 1em;
   color: var(--color-3);
   line-height: 1.5;
   padding: 0.25em 0;
 }
 
 .contact-card span {
-  font-family: var(--font-1);
+  font-family: var(--font-3);
   font-weight: 600;
   font-size: 1em;
-  color: var(--color-6);
+  color: var(--color-3);
 }
 
 .contact-card ul {
   padding: 0.5em 0 0.5em 2em;
 }
 
-.contact-card i {
-  font-family: var(--font-2);
-  font-weight: 600;
-  font-size: 0.8em;
-  color: var(--color-3);
-}
 
 .contact-card img {
   width: 100%;
@@ -475,10 +469,18 @@
   margin-bottom: 1em;
 }
 
-.contact-item span {
-  font-family: var(--font-1);
+.contact-item h3 {
+  font-family: var(--font-3);
   font-weight: 500;
-  font-size: 0.8em;
+  font-size: 1em;
+  color: var(--color-3);
+  text-align: left;
+}
+
+.contact-item span {
+  font-family: var(--font-3);
+  font-weight: 500;
+  font-size: 1em;
   color: var(--color-3);
   text-align: left;
 }
@@ -488,18 +490,18 @@
   cursor: pointer;
   transition: transform 0.3s;
   font-family: var(--font-1);
-  font-weight: 600;
-  font-size: 0.8em;
+  font-weight: 500;
+  font-size: 1em;
   text-align: left;
-  color: var(--color-6);
+  color: var(--color-2);
 }
 
 .contact-item a:hover {
-  color: var(--color-2);
+  color: var(--color-6);
   transform: scale(1.04);
 }
 
 .contact-item a:active {
-  color: var(--color-2);
+  color: var(--color-3);
   transform: scale(1.08);
 }
