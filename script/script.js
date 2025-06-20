@@ -140,12 +140,6 @@ document.addEventListener('DOMContentLoaded', async function () {
   });
 
   document
-    .getElementById('commerce-menu')
-    .addEventListener('click', async () => {
-      await showModalCommerce();
-    });
-
-  document
     .getElementById('trainingBtn-mobile')
     .addEventListener('click', async () => {
       await showModalTraining();
