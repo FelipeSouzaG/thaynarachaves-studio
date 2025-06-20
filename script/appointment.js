@@ -173,6 +173,12 @@ async function appointmentTime(horario, data) {
       return;
     }
 
+    footer.innerHTML = `
+      <div class="loading-spinner">
+        <div class="spinner"></div>
+      </div>
+    `;
+
     const appointmentDetails = {
       data: data,
       horario: horario,
@@ -193,9 +199,18 @@ async function appointmentTime(horario, data) {
       const appointmentData = await res.json();
 
       if (!res.ok || appointmentData.status === 'error') {
+        footer.innerHTML = `
+          <div class="modal-user-footer">
+            <button id="submit" class="modal-content-btn-enable">Enviar</button>
+          </div>
+        `;
         showModalAlert('Alert', 'Erro!', appointmentData.message, closeModal);
         return;
       }
+
+       footer.innerHTML = `
+          <div class="modal-user-footer"></div>
+        `;
 
       if (appointmentData.whatsappLink) {
         window.open(appointmentData.whatsappLink, '_blank');
