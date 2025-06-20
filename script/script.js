@@ -1,6 +1,5 @@
 import { appointmentDay } from './appointment.js';
 import {
-  showModalCommerce,
   showModalTraining,
   showModalContact,
   showModalInformation,
