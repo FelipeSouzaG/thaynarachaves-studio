@@ -4,6 +4,16 @@ import {
   showModalInformation,
 } from './info.js';
 
+async function enableFullScreen() {
+  if (document.documentElement.requestFullscreen) {
+    document.documentElement.requestFullscreen();
+  } else if (document.documentElement.webkitRequestFullscreen) {
+    document.documentElement.webkitRequestFullscreen();
+  } else if (document.documentElement.msRequestFullscreen) {
+    document.documentElement.msRequestFullscreen();
+  }
+}
+
 function detectDeviceType() {
   const ua = navigator.userAgent;
 
@@ -24,36 +34,18 @@ async function heroDesktop() {
   }
 }
 
-function enableFullScreenOnGesture() {
-  function requestFS() {
-    if (document.fullscreenElement) return;
-    const docEl = document.documentElement;
-
-    if (docEl.requestFullscreen) {
-      docEl.requestFullscreen();
-    } else if (docEl.webkitRequestFullscreen) {
-      docEl.webkitRequestFullscreen();
-    } else if (docEl.msRequestFullscreen) {
-      docEl.msRequestFullscreen();
-    }
-  }
-
-  const listener = () => {
-    requestFS();
-    document.removeEventListener('click', listener);
-    document.removeEventListener('touchstart', listener);
-  };
-
-  document.addEventListener('click', listener, { once: true });
-  document.addEventListener('touchstart', listener, { once: true });
-}
-
 document.addEventListener('DOMContentLoaded', async () => {
   const deviceType = detectDeviceType();
 
   if (deviceType === 'mobile' || deviceType === 'tablet') {
-    enableFullScreenOnGesture();
     await initMobileLayout();
+    await enableFullScreen();
+
+    document.addEventListener('click', async () => {
+      if (!document.fullscreenElement) {
+        await enableFullScreen();
+      }
+    });
   }
 
   if (deviceType === 'desktop') {
